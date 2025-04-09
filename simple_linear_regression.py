@@ -30,7 +30,9 @@ print(f"Phương trình hồi quy: y = {beta_0:.2f} + {beta_1:.2f}x")
 
 # tinh MSE
 y_pred = beta_0 + beta_1 * x
+sse = np.sum((y - y_pred)**2)
 mse = np.mean((y - y_pred)**2)
+print(f"SSE: {sse:.2f}")
 print(f"MSE: {mse:.2f}")
 
 # Vẽ đồ thị
