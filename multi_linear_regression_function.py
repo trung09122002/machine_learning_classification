@@ -14,9 +14,10 @@ def linear_regression(x, y):
     beta_0 = y_mean - beta_1 * x_mean
 
     y_pred = beta_0 + beta_1 * x
+    sse = np.sum((y - y_pred) ** 2)
     mse = np.mean((y - y_pred) ** 2)
 
-    return (f"y = {beta_0:.2f} + {beta_1:.2f}x"), mse, beta_0, beta_1
+    return (f"y = {beta_0:.2f} + {beta_1:.2f}x"), mse, beta_0, beta_1, sse
 
 def plot_regression(x, y, beta_0, beta_1):
     plt.scatter(x, y, color='blue', label='Data points')
@@ -36,18 +37,23 @@ def main():
     y = np.array([1250, 1380, 1425, 1425, 1450, 1300, 1400, 1510, 1575, 1650])
 
     print(f"phuong trinh hoi quy 1: {linear_regression(x1, y)[0]}")
+    print(f"SSE1: {linear_regression(x1, y)[4]:.2f}")
     print(f"MSE1: {linear_regression(x1, y)[1]:.2f}")
 
     print(f"phuong trinh hoi quy 2: {linear_regression(x2, y)[0]}")
+    print(f"SSE2: {linear_regression(x2, y)[4]:.2f}")
     print(f"MSE2: {linear_regression(x2, y)[1]:.2f}")
 
     print(f"phuong trinh hoi quy 3: {linear_regression(x3, y)[0]}")
+    print(f"SSE3: {linear_regression(x3, y)[4]:.2f}")
     print(f"MSE3: {linear_regression(x3, y)[1]:.2f}")
 
     beta_0 = linear_regression(x1, y)[2] + linear_regression(x2, y)[2] + linear_regression(x3, y)[2]
+    sse = linear_regression(x1, y)[4] + linear_regression(x2, y)[4] + linear_regression(x3, y)[4]
     mse = linear_regression(x1, y)[1] + linear_regression(x2, y)[1] + linear_regression(x3, y)[1]
 
     print(f"phuong trinh hoi quy: y = {beta_0:.2f} + {linear_regression(x1, y)[3]:.2f}x1 + {linear_regression(x2, y)[3]:.2f}x2 + {linear_regression(x3, y)[3]:.2f}x3")
+    print(f"SSE: {sse:.2f}")
     print(f"MSE: {mse:.2f}")
 
     # Vẽ đồ thị hồi quy cho từng biến độc lập
